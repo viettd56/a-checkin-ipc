@@ -22,8 +22,13 @@ const init = function (cb) {
 
 const initPromise = function () {
     return new Promise(function (resolve, reject) {
-        init(function (data) {
-            resolve(data);
+        init(function ({on, emit}) {
+            resolve({
+                on,
+                openDoor: function(doorNumber){
+                    emit("door", doorNumber)
+                }
+            });
         })
     });
 }
