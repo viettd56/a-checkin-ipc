@@ -26,7 +26,10 @@ const initPromise = function () {
             resolve({
                 on,
                 openDoor: function(doorNumber){
-                    emit("door", doorNumber)
+                    emit("open-door", doorNumber)
+                },
+                closeDoor: function (doorNumber) {
+                    emit("close-door", doorNumber)
                 }
             });
         })
