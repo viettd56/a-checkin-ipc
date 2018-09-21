@@ -26,39 +26,23 @@ const initPromise = function () {
             resolve({
                 on,
                 openDoor: function(doorNumber){
-                    emit("open-door", doorNumber)
+                    emit("request-open-door", doorNumber)
                 },
                 closeDoor: function (doorNumber) {
-                    emit("close-door", doorNumber)
+                    emit("request-close-door", doorNumber)
                 }
             });
         })
     });
 }
 
-// initPromise().then(function ({ on, emit }) {
-//     on(
-//         'connect',
-//         function () {
-//             ipc.log('## connected to world ##'.rainbow, ipc.config.delay);
-//             emit(
-//                 'message',  //any event or message type your server listens for
-//                 'ping'
-//             )
-//         }
-//     );
-//     on(
-//         'disconnect',
-//         function () {
-//             ipc.log('disconnected from world'.notice);
-//         }
-//     );
-//     on(
-//         'message',  //any event or message type your server listens for
-//         function (data) {
-//             ipc.log('got a message from world : '.debug, data);
-//         }
-//     );
-// })
+initPromise().then(function ({ on, emit }) {
+    on(
+        'open-door',  //any event or message type your server listens for
+        function (data) {
+            ipc.log('got a message from world : '.debug, data);
+        }
+    );
+})
 
 module.exports = initPromise;
